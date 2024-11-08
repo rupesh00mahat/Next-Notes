@@ -4,7 +4,7 @@ import { IoMdAdd } from "react-icons/io";
 import NoteItem from "@/app/components/note-item";
 import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import { format, getDate } from "date-fns";
+import { format } from "date-fns";
 
 interface Note {
   id: string,
@@ -22,13 +22,17 @@ const getDateAndTime = () => {
 export default function Home() {
   const [selectedColor, setSelectedColor] = useState<string>("red-500");
 
-  const [notes, setNotes] = useState<Note[]>([{ id: "0", noteText: "Demo Text", dateAndTime: getDateAndTime() , bgColor: selectedColor}]);
+  const [notes, setNotes] = useState<Note[]>([{ id: uuidv4(), noteText: "Demo Text", dateAndTime: getDateAndTime() , bgColor: selectedColor}]);
   const newNote = () => {
-    let task = notes;
     const dateAndTime = getDateAndTime();
 
-    let newNoteItem = task.concat([{ id: uuidv4(), noteText: "", dateAndTime: dateAndTime, bgColor:selectedColor }]);
-    setNotes(newNoteItem);
+    const  newNoteItem:Note = {
+      id: uuidv4(),
+      noteText: "",
+      dateAndTime,
+      bgColor: selectedColor
+    };
+    setNotes(prevNotes => [...prevNotes, newNoteItem]);
   }
 
   const setNewColor = (newColor: string) => {
@@ -68,7 +72,7 @@ export default function Home() {
             className="bg-cyan-900 p-4 rounded-full"></button>
         </div>
         <div className="notes grid grid-cols-3 w-full gap-10">
-          {notes.map(({ id, noteText, dateAndTime, bgColor }) => { return <NoteItem key={id} id={id} noteText={noteText} dateAndTime={dateAndTime} bgColor={bgColor}/> })}
+          {notes.map(({ id, noteText, dateAndTime, bgColor }) => { return <NoteItem key={id}  noteText={noteText} dateAndTime={dateAndTime} bgColor={bgColor}/> })}
 
         </div>
       </div>
