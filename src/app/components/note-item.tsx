@@ -8,7 +8,7 @@ interface NoteItemProps {
 function NoteItem({ noteText, dateAndTime, bgColor}:NoteItemProps) {
   const [text, setText] = useState(noteText);
   return (
-    <div className={`note bg-${bgColor} p-5 rounded-2xl shadow-lg text-xl w-full h-80`}>
+    <div className={`note bg-${bgColor} p-5 rounded-2xl shadow-lg text-xl w-full h-full`}>
             <textarea value={text}
             onChange={(e)=>{
               setText(e.target.value);

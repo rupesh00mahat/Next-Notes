@@ -35,8 +35,9 @@ export default function Home() {
     setNotes(prevNotes => [...prevNotes, newNoteItem]);
   }
 
-  const setNewColor = (newColor: string) => {
+  const setNewColor = (newColor: string, button: HTMLElement) => {
     setSelectedColor(newColor);
+    
   }
 
 
@@ -52,24 +53,24 @@ export default function Home() {
 
           </button>
           <button
-            onClick={() => { setNewColor("red-500") }}
-            className="bg-red-500 p-4 rounded-full border-b border-2 border-black"></button>
+            onClick={(e) => { setNewColor("red-500", e.target as HTMLElement) }}
+            className={`bg-red-500 p-4 rounded-full border-b border-2 ${selectedColor == 'red-500' ? 'border-black border-2 ': ''}`}></button>
           <button
-            onClick={() => { setNewColor("blue-400") }}
+            onClick={(e) => { setNewColor("blue-400", e.target as HTMLElement) }}
 
-            className="bg-blue-400 p-4 rounded-full"></button>
+            className={`bg-blue-400 p-4 rounded-full ${selectedColor == 'blue-400' ? 'border-black border-2 ': ''}`}></button>
           <button
-            onClick={() => { setNewColor("green-600") }}
+            onClick={(e) => { setNewColor("green-600", e.target as HTMLElement) }}
 
-            className="bg-green-600 p-4 rounded-full"></button>
+            className={`bg-green-600 p-4 rounded-full ${selectedColor == 'green-600' ? 'border-black border-2 ': ''}`}></button>
           <button
-            onClick={() => { setNewColor("gray-200") }}
+            onClick={(e) => { setNewColor("gray-200", e.target as HTMLElement) }}
 
-            className="bg-gray-200 p-4 rounded-full"></button>
+            className={`bg-gray-200 p-4 rounded-full ${selectedColor == 'gray-200' ? 'border-black border-2 ': ''}`}></button>
           <button
-            onClick={() => { setNewColor("cyan-900") }}
+            onClick={(e) => { setNewColor("cyan-900", e.target as HTMLElement) }}
 
-            className="bg-cyan-900 p-4 rounded-full"></button>
+            className={`bg-cyan-900 p-4 rounded-full ${selectedColor == 'cyan-900' ? 'border-black border-2 ': ''}`}></button>
         </div>
         <div className="notes grid grid-cols-3 w-full gap-10">
           {notes.map(({ id, noteText, dateAndTime, bgColor }) => { return <NoteItem key={id}  noteText={noteText} dateAndTime={dateAndTime} bgColor={bgColor}/> })}
